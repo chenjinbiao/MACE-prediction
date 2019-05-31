@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../static/css/test.css"/>
+    <script src="../static/js/test.js"></script>
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>>
+</head>
+<body>
+
+<img id="barc" src="../static/images/barc.png" style="display: none;margin-left: 20px;margin-top: 20px;" >
+<div class="dowebok" style="background-color: #ffffff;width: 700px; height: 500px;border: 5px solid #17a2b8; ">
+    <!--<div class="logo"></div>-->
+
+    <div class="row" style="height: 30px;"></div>
+
+    <!--<div id="Layer1"  style="display: none; position: absolute; z-index: 100;">-->
+    <!--</div>-->
+    <div class="col-lg-10" style="font-size:25px;line-height:140% ;margin-left: 50px;">
+        <span  >缺血：</span>
+        <input type="radio" name="qx" value="复发型心绞痛" >复发型心绞痛
+          <input type="radio" name="qx" value="急性心梗" style="margin-left : 125px">急性心梗
+        <br>
+        <input type="radio" name="qx" value="非计划性再次血运重建" style="margin-left : 80px">非计划性再次血运重建
+          <input type="radio" name="qx" value="心源性死亡" style="margin-left : 25px">心源性死亡
+        <br>
+        <input type="radio" name="qx" value="缺血相关的恶性心律失常" style="margin-left : 80px">缺血相关的恶性心律失常
+          <input type="radio" name="qx" value="无" >无
+        <br>
+    </div>
+    <div class="row" style="height: 40px;"></div>
+    <div class="col-lg-10" style="font-size:25px;line-height:140% ;margin-left: 50px;">
+        <a  href="" onmouseout="closeBarc();" onmousemove="showBarc();">出血(BARC分级)：</a>
+        <input type="radio" name="cx" value="0" style="margin-left :10px">0型
+          <input type="radio" name="cx" value="1" style="margin-left : 30px">1型
+        <input type="radio" name="cx" value="2" style="margin-left :30px">2型
+        <br>
+        <input type="radio" name="cx" value="3a" style="margin-left :217px">3a型
+          <input type="radio" name="cx" value="3b" style="margin-left : 17px">3b型
+        <input type="radio" name="cx" value="3c" style="margin-left :17px">3c型
+        <br> <input type="radio" name="cx" value="4" style="margin-left :217px">4型
+          <input type="radio" name="cx" value="5a" style="margin-left : 30px">5a型
+        <input type="radio" name="cx" value="5b" style="margin-left :19px">5b型
+        <br>
+    </div>
+    <div class="row" style="height: 30px;"></div>
+    <div style="font-size:25px;line-height:140% ;margin-left: 40px;"><span style="margin-right: 30px;margin-left: 30px">事件发生时间: </span>
+        <input name="txt" type="date"></div>
+
+
+
+
+    <div class="row" style="height: 40px;"></div>
+    <div  style="text-align:center;">
+        <button id="submit" style="margin-left: 10px;font-size:24px;line-height:140% ; width: 100px">确 定</button>
+
+        <a href="login.html"><button  style="margin-left: 50px;font-size:24px;line-height:140% ;width: 100px;">取 消</button></a> </div>
+
+</div>
+<script src="images/jquery.min.js"></script>
+<div id="Layer1" style="display:none;position:absolute;z-index:1;"></div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../static/css/test.css"/>
+    <script src="../static/js/test.js"></script>
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>>
+</head>
+<body>
+
+<!--<img id="barc" src="../static/images/barc.png" style="display: none;margin-left: 20px;margin-top: 20px;" >-->
+<span class="dowebok" style="background-color: #ffffff;width: 1100px; height: 850px;border: 5px solid #17a2b8;margin: -470px 0 0 -800px ">
+    <!--<div class="logo"></div>-->
+    <span class="close" style="font-size:34px;line-height:140% ;margin-right: 30px;" >X</span>
+    <div class="row" style="height: 30px;"></div>
+    <div style="font-size:20px;line-height:140% ;margin-left: 50px;">
+        ID号：<span style="margin-left: 10px;margin-right: 60px;">2434124</span>
+        年龄：<span style="margin-left: 10px;margin-right: 60px;">773</span>
+        诊断：<span style="margin-left: 10px;margin-right: 60px;">心功能不全</span>
+        <br>
+        姓名：<span style="margin-left: 10px;margin-right: 95px;">张三</span>
+        性别：<span style="margin-left: 10px;margin-right: 60px;">男</span>
+        <br>
+    </div>
+        <div class="row" style="height: 30px;"></div>
+    <div   style="font-size:20px;line-height:140% ;margin-left: 50px;width:600px;height: 600px;float:left;border-style:dotted">
+
+        GRACE：<span style="margin-left: 10px;margin-right: 190px;">135</span>
+        CRUSADE：<span style="margin-left: 10px;margin-right: 60px;">34</span>
+        <br> <br>
+        缺血-新模型 ：<span style="margin-left: 10px;margin-right: 130px;">0.63</span>
+        出血-新模型 ：<span style="margin-left: 10px;margin-right: 60px;">0.21</span>
+        <br> <br>
+        <span class="errorMsg" style="width:250px;display:inline-block;">
+            身高：<span style="margin-left: 10px">180</span>cm</span>
+         <span class="errorMsg" style="width:250px;display:inline-block;"> 体重：<span style="margin-left: 10px;">50千克</span></span>
+
+        <br> <br>
+        心率：<span style="margin-left: 10px;">95</span><span style="margin-right: 197px;">次</span>
+        心脏标志物升高：<span style="margin-left: 10px;margin-right: 60px;">有</span>
+        <br> <br>
+        收缩压：<span style="margin-left: 10px;">120</span><span style="margin-right: 127px;">mmHg</span>
+        舒张压：<span style="margin-left: 10px;">60</span><span style="margin-right: 60px;">mmHg</span>
+        <br> <br>
+        肌酐：<span style="margin-left: 10px;">122</span><span style="margin-right: 145px;">umol/L</span>
+        肌酐清除率：<span style="margin-left: 10px;">20</span><span style="margin-right: 60px;">%</span>
+        <br> <br>
+        体温：<span style="margin-left: 10px;">23</span><span style="margin-right: 197px;">度</span>
+        红血球容积比：<span style="margin-left: 10px;">23</span><span style="margin-right: 60px;">L/L</span>
+        <br> <br>
+        ST段偏移：<span style="margin-left: 10px;margin-right: 110px;"> <select name="sel" >
+        <option value="0">未发生</option>
+        <option value="1">发生</option>
+        </select></span>
+        killip分级：<span style="margin-left: 10px;margin-right: 60px;"> <select name="sel" >
+        <option value="1">Ⅰ级</option>
+        <option value="2">Ⅱ级</option>
+        <option value="3">Ⅲ级</option>
+        <option value="4">Ⅳ级</option>
+        </select></span>
+        <br> <br>
+        入院时心跳骤停：<span style="margin-left: 5px;margin-right: 15px;"> <select name="sel" >
+        <option value="0">未发生骤停</option>
+        <option value="1">发生骤停</option>
+        </select></span>
+        充血性心衰体征：<span style="margin-left: 10px;margin-right: 60px;">
+        <select name="sel" >
+        <option value="0">未出现</option>
+        <option value="1">出现</option>
+        </select>
+    </span>
+        <br> <br>
+        既往血管系统疾病史：<span style="margin-left: 10px;margin-right: 50px;"> <select name="sel" >
+           <option value="0">无</option>
+            <option value="1">有</option>
+    </select></span>
+        糖尿病：<span style="margin-left: 10px;margin-right: 55px;"> <select name="sel" >
+        <option value="0">无</option>
+        <option value="1">有</option>
+    </select></span>
+        <br>
+</div>
+    <div  style="font-size:20px;line-height:140% ;width: 400px;height: 600px;float:right;border-style:solid ">
+        <a  href="" onmouseout="closeAcs();" onmousemove="showAcs();">入列原因（查看ACS分型）：</a><br><br>
+        <input type="radio" name="acs_event" value="不稳定性心绞痛" >不稳定性心绞痛   
+        <br><br>
+        <input type="radio" name="acs_event" value="ST段抬高型心梗" >ST段抬高型心梗
+        <br><br>
+        <input type="radio" name="acs_event" value="非ST段抬高型心梗" >非ST段抬高型心梗
+        <br><br>
+        <span  >排除原因：</span><br><br>
+        <input type="radio" name="acs_event" value="非ACS" >非ACS
+        <br><br>
+        <input type="radio" name="acs_event" value="ACS伴严重贫血（血红蛋白<60g/L）" >ACS伴严重贫血（血红蛋白<60g/L）
+        <br>
+    </div>
+
+
+    <!--<div id="Layer1"  style="display: none; position: absolute; z-index: 100;">-->
+    <!--</div>-->
+    <!--<div class="col-lg-10" style="font-size:20px;line-height:140% ;margin-left: 50px;">-->
+       <!---->
+    <!--</div>-->
+    <!--<div class="row" style="height: 40px;"></div>-->
+    <!--<div class="col-lg-10" style="font-size:25px;line-height:140% ;margin-left: 50px;">-->
+        <!--<a  href="" onmouseout="closeBarc();" onmousemove="showBarc();">出血(BARC分级)：</a>-->
+        <!--<input type="radio" name="cx" value="0" style="margin-left :10px">0型-->
+        <!--  <input type="radio" name="cx" value="1" style="margin-left : 30px">1型-->
+        <!--<input type="radio" name="cx" value="2" style="margin-left :30px">2型-->
+        <!--<br>-->
+        <!--<input type="radio" name="cx" value="3a" style="margin-left :217px">3a型-->
+        <!--  <input type="radio" name="cx" value="3b" style="margin-left : 17px">3b型-->
+        <!--<input type="radio" name="cx" value="3c" style="margin-left :17px">3c型-->
+        <!--<br> <input type="radio" name="cx" value="4" style="margin-left :217px">4型-->
+        <!--  <input type="radio" name="cx" value="5a" style="margin-left : 30px">5a型-->
+        <!--<input type="radio" name="cx" value="5b" style="margin-left :19px">5b型-->
+        <!--<br>-->
+    <!--</div>-->
+    <!--<div class="row" style="height: 30px;"></div>-->
+    <!--<div style="font-size:25px;line-height:140% ;margin-left: 40px;"><span style="margin-right: 30px;margin-left: 30px">事件发生时间: </span>-->
+        <!--<input name="txt" type="date"></div>-->
+
+    <div class="row" style="height: 100px;"></div>
+    <div  style="text-align:center;width: 1100px;">
+        <button id="submit" style="margin-left: 10px;font-size:24px;line-height:140% ; width: 100px">确 定</button>
+        <a href="login.html"><button  style="margin-left: 150px;font-size:24px;line-height:140% ;width: 100px;">取 消</button></a> </div>
+</div>
+<img id="acs" src="../static/images/acs.png" style="display:none;margin-left: 1270px;margin-top: 100px;" >
+<script src="images/jquery.min.js"></script>
+<!--<div id="Layer1" style="display:none;position:absolute;z-index:1;"></div>-->
+</body>
+</html>

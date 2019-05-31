@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head >
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>-->
+    <!--<link rel="stylesheet" href="../static/css/test.css" th:href="@{/css/test.css}"/>-->
+    <script src="../static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/assets/js/jquery.messager.js" th:src="@{/assets/js/jquery.messager.js}"></script>
+    <script src="../static/js/test.js" th:src="@{/js/test.js}"></script>
+    <link rel="stylesheet" href="http://localhost:8080/static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="http://localhost:8080/static/css/test.css" th:href="@{/css/test.css}"/>
+    <!--<script src="http://localhost:8080/static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>-->
+    <!--<script src="http://localhost:8080/static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>-->
+    <!--<script src="http://localhost:8080/static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>-->
+    <!--<script src="http://localhost:8080/static/assets/js/jquery.messager.js" th:src="@{/assets/js/jquery.messager.js}"></script>-->
+    <!--<script src="http://localhost:8080/static/js/test.js" th:src="@{/js/test.js}"></script>-->
+    <script type="text/javascript">
+
+        $(function() {
+
+
+
+            var ischemiaEvent=document.getElementById("ischemiaEvent").value;
+            var bleedEvent=document.getElementById("bleedEvent").value;
+            var deadEvent=document.getElementById("deadEvent").value;
+            // $("input[name='recordDate']").val();
+            $("input[name='cx'][value='"+bleedEvent+"']").attr("checked",true);
+            $("input[name='qx'][value='"+ischemiaEvent+"']").attr("checked",true);
+            $("input[name='dead'][value='"+deadEvent+"']").attr("checked",true);
+        });
+    </script>
+</head>
+<body>
+<div class="row" style="height: 20px;"></div>
+
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <nav class="navbar navbar-expand-lg navbar-inverse navbar-light" style="font-size:25px;line-height:140% ;margin-right: 30px;background-color: #007bff;">
+            <div class="container-fluid">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" th:href="@{/main/PageNum=1}" >待判断患者</a>
+                    <a class="nav-item nav-link"   style="color: #FFFFFF;">在院在列患者</a>
+                    <a class="nav-item nav-link" th:href="@{/dequeue/PageNum=1}">已出院在列患者</a>
+
+                </div>
+                <div class="navbar-nav navbar-right" style="color: #FFFFFF;">
+                    <!--<button type="button" onclick="showModal('myModal1')"  style="border:#007bff ;background-image: url(images/add.png);background-color:#007bff;background-size:cover;width: 42px;height: 40px;margin-left: 30px";>-->
+                    <!--</button>-->
+                    <!--<button type="button" class="btn btn-default" id="search" onclick="showModal()">-->
+                    <!--&lt;!&ndash;style="background-color: #007bff;color: #ffffff;font-size:34px;line-height:140% ">&ndash;&gt;-->
+                    <!--添加患者-->
+                    <!--</button>-->
+                    当前用户：<p th:text="${active_user.name}"></p>医生
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="row" style="height: 20px;"></div>
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <table class="table table-hover table-condensed" style="border: 1px solid #545b62;width: 1570px">
+            <thead>
+
+            <tr style="background-color: #007bff">
+                <th scope="col"  style="color: #FFFFFF;">患者姓名</th>
+                <th scope="col"  style="color: #FFFFFF;">患者ID</th>
+                <th scope="col"  style="color: #FFFFFF;">性别</th>
+                <th scope="col"  style="color: #FFFFFF;">年龄</th>
+                <th scope="col"  style="color: #FFFFFF;">入院日期</th>
+                <th scope="col"  style="color: #FFFFFF;">GRACE(0-258)</th>
+                <th scope="col"  style="color: #FFFFFF;">CRUSAD(1-96)</th>
+                <th scope="col"  style="color: #FFFFFF;">新模型-缺血(0-1)</th>
+                <th scope="col"  style="color: #FFFFFF;">新模型-出血(0-1)</th>
+                <th scope="col" style="color: #FFFFFF;" th:title="|剩下|+${unrecordNum}+|位患者未记录不良事件|">未记录(  <span style="color: red" th:text="${unrecordNum}"></span>/<span th:text="${listSize}"></span>)</th>
+                <th scope="col" style="color: #FFFFFF;"></th>
+                <th scope="col"  style="color: #FFFFFF;"></th>
+            </thead>
+            <tbody>
+            <tr th:each="Queue:${enqueueList}">
+                <th scope="row" ><a onclick="showModal('modal_information')" th:href="@{/enqueue/{Page}/{pid}/{vid}(Page='PageNum='+ ${nowPage},pid = ${Queue.patientID},vid = ${Queue.visitID})}" th:text="${Queue.kinName}"></a></th>
+                <!--<td><a th:href="@{/book/update/{bookId}(bookId=${book.id})}" th:text="${book.name}"></a></td>-->
+                <td th:text="${Queue.patientID==-1?'缺失':Queue.patientID}"></td>
+                <td th:text="${Queue.sex==-1?'缺失':Queue.sex}"></td>
+                <td th:text="${Queue.age==-1?'缺失':Queue.age}"></td>
+                <td th:text="${Queue.diagnosisDate==-1?'缺失':Queue.diagnosisDate}"></td>
+                <td th:style="|color:|+ ${Queue.grace==-1?'red':'black'}" th:text="${Queue.grace==-1?'缺失':Queue.grace}"></td>
+                <td th:style="|color:|+ ${Queue.crusade==-1?'red':'black'}" th:text="${Queue.crusade==-1?'缺失':Queue.crusade}"></td>
+                <td th:style="|color:|+ ${Queue.ischemiaModelScorece==-1?'red':'black'}" th:text="${Queue.ischemiaModelScorece==-1?'缺失':Queue.ischemiaModelScorece}"></td>
+                <td th:style="|color:|+ ${Queue.bleedModelScore==-1?'red':'black'}" th:text="${Queue.bleedModelScore==-1?'缺失':Queue.bleedModelScore}"></td>
+                <td><a th:text="事件记录" th:style="|color:|+ ${Queue.recordFlag==0?'red':''}" th:href="@{/enqueue/{Page}/Records/{pid}/{vid}(Page='PageNum='+ ${nowPage},pid = ${Queue.patientID},vid = ${Queue.visitID})}" ></a></td>
+                <td><a th:text="删除" th:href="@{/enqueue/{Page}/delete/{pid}/{vid}(Page='PageNum='+ ${nowPage},pid = ${Queue.patientID},vid = ${Queue.visitID})}" ></a></td>
+                <td><a th:text="出院" th:href="@{/enqueue/{Page}/out/{pid}/{vid}(Page='PageNum='+ ${nowPage},pid = ${Queue.patientID},vid = ${Queue.visitID})}"></a></td>
+
+            </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="pagination">
+    <!--<div class="col-lg-5"></div>-->
+
+    <ul class="pagination">
+        <li class="page-item" data-th-classappend="${nowPage == 1} ? 'disabled' : ''">
+            <a class="page-link" th:href="@{/enqueue/{Page}(Page='PageNum='+ ${nowPage-1})}" aria-label="Previous" >
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item" data-th-each="i : ${#numbers.sequence(1,pageSize)}"
+            data-th-classappend="${(nowPage) eq i} ? 'active' : ''" >
+            <a class="page-link"  th:href="@{/enqueue/{Page}(Page='PageNum='+ ${i})}">
+                <span data-th-text="${i}"></span>
+            </a>
+        </li>
+        <!--<li class="page-item"><a class="page-link" th:href="@{/main/{Page}(Page='PageNum='+ ${i})}" th:each="i:${#numbers.sequence(1,pageSize)}" th:text="${i}"></a></li>-->
+        <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+        <!--<li class="page-item"><a class="page-link active" href="#">3</a></li>-->
+        <!--<li class="page-item"><a class="page-link" href="#">4</a></li>-->
+        <!--<li class="page-item"><a th:style="${i == nowPage}? color:#ffffff " th:id="'page'+${i}" class="page-link" th:href="@{/main/{Page}(Page='PageNum='+ ${i})}" th:each="i:${#numbers.sequence(1,pageSize)}" th:text="${i}"></a></li>-->
+
+        <li class="page-item"  data-th-classappend="*{nowPage == pageSize} ? 'disabled' : ''">
+            <a class="page-link"   th:href="@{/enqueue/{Page}(Page='PageNum='+ ${nowPage+1})}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+<div class="row" style="height: 20px;"></div>
+
+<div id="modal_recordList" class="modal" th:style="|display: | + ${record_modal_flag ==1 ? 'block' : 'none'}">
+
+    <!--<div class="logo"></div>-->
+
+    <div class="dowebok" style="background-color: #ffffff;width: 800px; height: 600px;border: 5px solid #17a2b8; ">
+        <!--<div class="logo"></div>-->
+        <span class="close" style="font-size:34px;line-height:140% ;margin-right: 30px;"onclick="closeModal('modal_recordList')">X</span>
+        <div class="row" style="height: 50px;"></div>
+        <div style="text-align:center;color: #000000;font-size:34px;line-height:140% ;">
+            ID号:<span style="margin-left: 30px;margin-right: 60px" th:text="${patient.patientID}">无</span>
+            姓名:<span style="margin-left: 30px;margin-right: 30px" th:text="${patient.kinName}">无</span>
+            <a  th:href="@{/enqueue/{Page}/Records/{pid}/{vid}/{recordNo}(Page='PageNum='+ ${nowPage},pid = ${patient.patientID},vid=${patient.visitID},recordNo = ${nextRecord})}" ><button type="button"   style="border:#ffffff ;background-image: url(http://localhost:8080/static/images/add.png);background-color:#ffffff;background-size:cover;width: 42px;height: 40px";>
+               </button> </a>
+
+
+        </div>
+        <div class="row" style="height: 40px;"></div>
+
+        <div style="margin-left: 30px;margin-right: 60px;height:400px;overflow-y:scroll;">
+            <table class="table table-hover table-condensed" style="border: 1px solid #545b62;">
+                <thead>
+
+                <tr style="background-color: #007bff">
+                    <th scope="col" width="20%" style="color: #FFFFFF;">事件发生时间
+                    </th>
+                    <th scope="col" width="20%" style="color: #FFFFFF;">缺血事件类型
+                    </th>
+                    <th scope="col" width="20%" style="color: #FFFFFF;">出血BARC分级
+                    </th>
+                    <th scope="col" width="20%" style="color: #FFFFFF;">心源性死亡
+                    </th>
+                    <th scope="col" width="10%" style="color: #FFFFFF;">
+                    </th>
+                    <th scope="col" width="10%" style="color: #FFFFFF;">
+                    </th>
+                </thead>
+                <tbody>
+                <tr th:each="Record:${recordList}">
+                    <th scope="row" ><a th:text="${Record.recordDate}"></a></th>
+                    <!--<td><a th:href="@{/book/update/{bookId}(bookId=${book.id})}" th:text="${book.name}"></a></td>-->
+                    <td th:text="${Record.ischemiaEvent}"></td>
+                    <td th:text="${Record.bleedEvent}"></td>
+                    <td th:text="${Record.deadEvent}"></td>
+                    <td><a th:text="删除" th:href="@{/enqueue/{Page}/Records/{pid}/{vid}/delete/{recordNo}(Page='PageNum='+ ${nowPage},pid = ${patient.patientID},vid=${patient.visitID},recordNo = ${Record.recordNo})}" ></a></td>
+                    <td><a th:text="修改" th:href="@{/enqueue/{Page}/Records/{pid}/{vid}/{recordNo}(Page='PageNum='+ ${nowPage},pid = ${patient.patientID},vid=${patient.visitID},recordNo = ${Record.recordNo})}" ></a></td>
+
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<!--<div id="myModal3" class="modal" style="background-image: url('white.png')">-->
+<div id="myModal3" class="modal" th:style="|display: | + ${record_modal2_flag ==1 ? 'block' : 'none'}">
+
+    <input type="hidden" id="ischemiaEvent" name="ischemiaEvent" th:value="${thisRecord.ischemiaEvent}" />
+     <input type="hidden" id="bleedEvent" name="bleedEvent" th:value="${thisRecord.bleedEvent}"  />
+        <input type="hidden" id="deadEvent" name="deadEvent" th:value="${thisRecord.deadEvent}"  />
+    <img id="barc" src="http://localhost:8080/images/barc.png " style="display: none;margin-left: 120px;margin-top: 20px;" >
+    <form th:attr="method='post',action=@{/enqueue/{Page}/Records/{pid}/{vid}/{recordNo}(Page='PageNum='+ ${nowPage},pid = ${patient.patientID},vid=${patient.visitID},recordNo = ${thisRecord.recordNo})}">
+    <div class="dowebok" style="background-color: #ffffff;width: 750px; height: 550px;border: 5px solid #17a2b8;margin: -280px 0 0 -185px ">
+        <!--<div class="logo"></div>-->
+        <span class="close" style="font-size:34px;line-height:140% ;margin-right: 30px;"onclick="closeModal('myModal3')">X</span>
+        <div class="row" style="height: 30px;"></div>
+
+        <!--<div id="Layer1"  style="display: none; position: absolute; z-index: 100;">-->
+        <!--</div>-->
+        <div class="col-lg-10" style="font-size:25px;line-height:140% ;margin-left: 50px;">
+            <span >缺血：</span>
+
+            <input type="radio" name="qx" value="非计划性再次血运重建" style="width:20px;height:20px;">非计划性再次血运重建
+             <input type="radio" name="qx" value="复发型心绞痛" style="width:20px;height:20px;margin-left : 30px;">复发型心绞痛
+            <!--  <input type="radio" name="qx" value="心源性死亡" style="margin-left : 25px;width:20px;height:20px;">心源性死亡-->
+            <br>
+            <input type="radio" name="qx" value="缺血相关的恶性心律失常" style="margin-left : 80px;width:20px;height:20px;">缺血相关的恶性心律失常
+              <input type="radio" name="qx" value="急性心梗" style="margin-left : 1px;width:20px;height:20px;">急性心梗
+            <br>
+            <input type="radio" name="qx" value="无" style="margin-left : 80px;width:20px;height:20px;">无
+        </div>
+
+
+        <div class="row" style="height: 40px;"></div>
+        <div class="col-lg-10" style="font-size:25px;line-height:140% ;margin-left: 50px;">
+            出血：
+             <input type="radio" name="cx" value="0" style="width:20px;height:20px;margin-left :8px">0型
+              <input type="radio" name="cx" value="1" style="width:20px;height:20px;margin-left :29px">1型
+            <input type="radio" name="cx" value="2" style="width:20px;height:20px;margin-left :31px">2型
+            <br>
+            <a  href="" onmouseout="closeBarc();" onmousemove="showBarc();" style="font-size:15px;">(BARC分级)</a>
+            <input type="radio" name="cx" value="3a" style="width:20px;height:20px;margin-left :15px">3a型
+              <input type="radio" name="cx" value="3b" style="width:20px;height:20px;margin-left : 17px">3b型
+            <input type="radio" name="cx" value="3c" style="width:20px;height:20px;margin-left :17px">3c型
+            <br> <input type="radio" name="cx" value="4" style="width:20px;height:20px;margin-left :97px">4型
+              <input type="radio" name="cx" value="5a" style="width:20px;height:20px;margin-left : 30px">5a型
+            <input type="radio" name="cx" value="5b" style="width:20px;height:20px;margin-left :19px">5b型
+            <br>
+        </div>
+        <div class="row" style="height: 40px;"></div>
+        <div class="col-lg-10" style="font-size:25px;line-height:140% ;margin-left: 50px;">
+            <span >死亡：</span>
+              <input type="radio" name="dead" value="心源性死亡" style="width:20px;height:20px;margin-left :3px">心源性死亡
+              <input type="radio" name="dead" value="非心源性死亡" style="width:20px;height:20px;margin-left :30px">非心源性死亡
+            <input type="radio" name="dead" value="无" style="width:20px;height:20px;margin-left :30px">无
+            <br>
+        </div>
+        <div class="row" style="height: 30px;"></div>
+        <div style="font-size:25px;line-height:140% ;margin-left: 40px;"><span style="margin-right: 30px;margin-left: 25px">事件发生时间: </span>
+            <input name="recordDate" type="date" id="recordDate"  th:value="${thisRecord.recordDate}"></div>
+
+
+
+
+        <div class="row" style="height: 40px;"></div>
+        <div  style="text-align:center;">
+            <button id="submit" style="margin-left: 10px;font-size:24px;line-height:140% ; width: 100px">确 定</button>
+
+            <a th:href="@{/enqueue/{Page}/Records/{pid}/{vid}(Page='PageNum='+ ${nowPage},pid = ${patient.patientID},vid=${patient.visitID})}"><button  type="button" style="margin-left: 50px;font-size:24px;line-height:140% ;width: 100px;">取 消</button></a> </div>
+
+    </div>
+    </form>
+</div>
+
+</body>
+</html>
+
